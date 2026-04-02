@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Danilo Ferrante</title>
+    <meta name="description" content="Informativa sul trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).">
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta name="theme-color" content="#050505">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #050505;
+            --surface: #0c0c0c;
+            --text: #b8b4ac;
+            --text-bright: #e8e4dc;
+            --text-dim: #5a5750;
+            --accent: #4dffa3;
+            --accent-dim: rgba(77,255,163,0.1);
+            --border: rgba(200,196,188,0.07);
+            --border-accent: rgba(77,255,163,0.22);
+            --mono: 'IBM Plex Mono', monospace;
+            --serif: 'EB Garamond', Georgia, serif;
+            --sans: 'IBM Plex Sans', sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 9998;
+        }
+        ::-webkit-scrollbar { width: 2px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid var(--border);
+            background: rgba(5,5,5,0.94);
+            backdrop-filter: blur(16px);
+            padding: 1.25rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+        }
+        .nav-logo {
+            font-family: var(--mono);
+            font-size: 0.875rem;
+            color: var(--text-bright);
+            text-decoration: none;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-back {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .nav-back:hover { color: var(--accent); }
+
+        /* MAIN */
+        main {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 6rem 3rem 8rem;
+        }
+
+        /* HEADER */
+        .page-header { margin-bottom: 4rem; }
+        .page-tag {
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--accent);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .page-tag::before { content: ''; width: 2rem; height: 1px; background: var(--accent); }
+        .page-title {
+            font-family: var(--mono);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+        .page-meta {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+        }
+        .page-intro {
+            font-family: var(--serif);
+            font-size: 1.125rem;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.75;
+            padding: 2rem;
+            border-left: 2px solid var(--border-accent);
+            background: var(--accent-dim);
+            margin-top: 2.5rem;
+        }
+
+        /* SECTIONS */
+        .privacy-section { margin-bottom: 3.5rem; }
+        .privacy-section + .privacy-section { padding-top: 3.5rem; border-top: 1px solid var(--border); }
+
+        .sec-num {
+            font-family: var(--mono);
+            font-size: 0.5625rem;
+            color: var(--accent);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .sec-title {
+            font-family: var(--mono);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.25rem;
+        }
+        .sec-body {
+            font-size: 0.9375rem;
+            color: var(--text);
+            line-height: 1.85;
+        }
+        .sec-body p + p { margin-top: 1rem; }
+        .sec-body strong { color: var(--text-bright); font-weight: 500; }
+        .sec-body a { color: var(--accent); text-decoration: none; }
+        .sec-body a:hover { text-decoration: underline; }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+        }
+        .data-table th {
+            text-align: left;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-accent);
+        }
+        .data-table td {
+            color: var(--text);
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+
+        ul.priv-list {
+            list-style: none;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
+        }
+        ul.priv-list li {
+            font-size: 0.9375rem;
+            color: var(--text);
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.7;
+        }
+        ul.priv-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-family: var(--mono);
+            color: var(--accent);
+        }
+
+        /* CONTACT BOX */
+        .contact-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+        .contact-box p {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text);
+            line-height: 1.8;
+            letter-spacing: 0.03em;
+        }
+        .contact-box p strong { color: var(--accent); }
+        .contact-box a { color: var(--accent); text-decoration: none; }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+        }
+        .f-logo { font-family: var(--mono); font-size: 0.875rem; color: var(--text-bright); letter-spacing: 0.2em; text-transform: uppercase; }
+        .f-logo span { color: var(--accent); }
+        .f-copy { font-family: var(--mono); font-size: 0.625rem; color: var(--text-dim); letter-spacing: 0.1em; text-align: center; }
+        .f-back { font-family: var(--mono); font-size: 0.625rem; color: var(--text-dim); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s ease; }
+        .f-back:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1.25rem 1.5rem; }
+            main { padding: 4rem 1.5rem 6rem; }
+            footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+            .data-table { font-size: 0.625rem; }
+            .data-table th, .data-table td { padding: 0.625rem 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="nav-logo">DF<span>.</span></a>
+    <a href="index.html" class="nav-back">← Torna al sito</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+    <header class="page-header">
+        <div class="page-tag">Documento Legale</div>
+        <h1 class="page-title">Privacy<br>Policy</h1>
+        <div class="page-meta">Ultimo aggiornamento: Aprile 2025 · Versione 1.0</div>
+        <div class="page-intro">
+            La presente informativa descrive come Danilo Ferrante tratta i dati personali raccolti tramite il sito daniferr.com, in conformità al Regolamento (UE) 2016/679 (GDPR) e alla normativa italiana vigente.
+        </div>
+    </header>
+
+    <!-- 1 -->
+    <div class="privacy-section">
+        <span class="sec-num">[01]</span>
+        <h2 class="sec-title">Titolare del trattamento</h2>
+        <div class="sec-body">
+            <p>Il Titolare del trattamento dei dati personali è:</p>
+            <div class="contact-box" style="margin-top:1.25rem;">
+                <p>
+                    <strong>Danilo Ferrante</strong><br>
+                    Digital Strategist & AI Specialist<br>
+                    Roma, Italia<br>
+                    Email: <a href="mailto:ferrdanilo88@gmail.com">ferrdanilo88@gmail.com</a><br>
+                    Sito: <a href="https://www.daniferr.com" target="_blank">www.daniferr.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="privacy-section">
+        <span class="sec-num">[02]</span>
+        <h2 class="sec-title">Dati raccolti e finalità</h2>
+        <div class="sec-body">
+            <p>Il sito raccoglie dati personali esclusivamente attraverso il modulo di contatto. Di seguito le finalità e le basi giuridiche del trattamento:</p>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Categoria dati</th>
+                        <th>Finalità</th>
+                        <th>Base giuridica</th>
+                        <th>Conservazione</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nome, email, azienda</td>
+                        <td>Rispondere alle richieste di contatto e consulenza</td>
+                        <td>Interesse legittimo / Contratto</td>
+                        <td>24 mesi dall'ultimo contatto</td>
+                    </tr>
+                    <tr>
+                        <td>Messaggio inviato</td>
+                        <td>Gestione della comunicazione professionale</td>
+                        <td>Interesse legittimo</td>
+                        <td>24 mesi dall'ultimo contatto</td>
+                    </tr>
+                    <tr>
+                        <td>Dati di navigazione (IP, browser, pagine visitate)</td>
+                        <td>Sicurezza del sito e analisi aggregata degli accessi</td>
+                        <td>Interesse legittimo</td>
+                        <td>30 giorni (log di sistema)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="privacy-section">
+        <span class="sec-num">[03]</span>
+        <h2 class="sec-title">Modalità di raccolta e strumenti utilizzati</h2>
+        <div class="sec-body">
+            <p>I dati inseriti nel modulo di contatto vengono trasmessi tramite <strong>Formspree</strong> (Formspree, Inc. — piattaforma di gestione form), il cui servizio è conforme al GDPR. Per informazioni sul trattamento da parte di Formspree: <a href="https://formspree.io/legal/privacy-policy" target="_blank">formspree.io/legal/privacy-policy</a>.</p>
+            <p>Il sito utilizza <strong>Google reCAPTCHA</strong> per prevenire l'invio automatico di messaggi spam. L'utilizzo di reCAPTCHA comporta la raccolta di dati da parte di Google Inc. per la verifica anti-abuso. Per maggiori informazioni: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a>.</p>
+            <p>Il sito è ospitato su infrastrutture con server localizzati nell'<strong>Unione Europea</strong>. I dati non vengono trasferiti verso Paesi terzi al di fuori dell'UE senza adeguate garanzie.</p>
+        </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="privacy-section">
+        <span class="sec-num">[04]</span>
+        <h2 class="sec-title">Diritti dell'interessato</h2>
+        <div class="sec-body">
+            <p>In qualità di interessato, hai il diritto di:</p>
+            <ul class="priv-list">
+                <li><strong>Accesso</strong> — ottenere conferma del trattamento e una copia dei tuoi dati (art. 15 GDPR)</li>
+                <li><strong>Rettifica</strong> — richiedere la correzione di dati inesatti o incompleti (art. 16 GDPR)</li>
+                <li><strong>Cancellazione</strong> — richiedere la cancellazione dei dati ("diritto all'oblio") (art. 17 GDPR)</li>
+                <li><strong>Limitazione</strong> — richiedere la limitazione del trattamento in determinate circostanze (art. 18 GDPR)</li>
+                <li><strong>Portabilità</strong> — ricevere i dati in formato strutturato e leggibile (art. 20 GDPR)</li>
+                <li><strong>Opposizione</strong> — opporsi al trattamento basato su interesse legittimo (art. 21 GDPR)</li>
+                <li><strong>Reclamo</strong> — presentare reclamo al Garante per la Protezione dei Dati Personali (<a href="https://www.garanteprivacy.it" target="_blank">garanteprivacy.it</a>)</li>
+            </ul>
+            <p style="margin-top:1.5rem;">Per esercitare i tuoi diritti, contattami a: <a href="mailto:ferrdanilo88@gmail.com">ferrdanilo88@gmail.com</a>. Risponderò entro 30 giorni dalla ricezione della richiesta.</p>
+        </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="privacy-section">
+        <span class="sec-num">[05]</span>
+        <h2 class="sec-title">Cookie e tracciamento</h2>
+        <div class="sec-body">
+            <p>Il sito <strong>non utilizza cookie di profilazione o di marketing</strong> propri. Non vengono installati cookie di terze parti a fini pubblicitari.</p>
+            <p>Possono essere presenti cookie tecnici strettamente necessari al funzionamento del sito (es. sicurezza delle sessioni) e cookie di terze parti legati all'utilizzo di Google reCAPTCHA, soggetti alla privacy policy di Google.</p>
+            <p>Proseguendo la navigazione, l'utente prende atto dell'utilizzo dei soli cookie tecnici necessari. Non è richiesto il consenso per i cookie tecnici ai sensi dell'art. 122 del Codice Privacy e delle linee guida del Garante.</p>
+        </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="privacy-section">
+        <span class="sec-num">[06]</span>
+        <h2 class="sec-title">Sicurezza dei dati</h2>
+        <div class="sec-body">
+            <p>Adotto misure tecniche e organizzative adeguate a proteggere i dati personali da accesso non autorizzato, divulgazione, alterazione o distruzione. Le comunicazioni avvengono tramite protocollo HTTPS con crittografia TLS.</p>
+            <p>I dati inviati tramite il modulo di contatto sono accessibili esclusivamente a Danilo Ferrante e non vengono condivisi con terze parti, salvo i fornitori tecnici strettamente necessari all'erogazione del servizio (Formspree, Google reCAPTCHA) e salvo obblighi di legge.</p>
+        </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="privacy-section">
+        <span class="sec-num">[07]</span>
+        <h2 class="sec-title">Aggiornamenti alla Privacy Policy</h2>
+        <div class="sec-body">
+            <p>La presente informativa può essere aggiornata in qualsiasi momento per riflettere modifiche alle pratiche di trattamento dei dati o a seguito di aggiornamenti normativi. La versione aggiornata sarà sempre disponibile a questo indirizzo con la data di ultimo aggiornamento.</p>
+            <p>Ti invitiamo a consultare periodicamente questa pagina. Per domande o chiarimenti: <a href="mailto:ferrdanilo88@gmail.com">ferrdanilo88@gmail.com</a>.</p>
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="f-logo">DF<span>.</span></div>
+    <div class="f-copy">
+        © 2025 Danilo Ferrante — Privacy Policy<br>
+        <span style="font-size:0.5625rem;opacity:0.4">Roma · Tutti i diritti riservati</span>
+    </div>
+    <a href="index.html" class="f-back">← Torna al sito</a>
+</footer>
+
+</body>
+</html>

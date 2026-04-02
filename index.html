@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danilo Ferrante — Digital Strategist & AI Specialist</title>
+    <meta name="description" content="Digital Strategist specializzato nell'integrazione dell'intelligenza artificiale per le aziende. Trasformo l'IA da buzzword a vantaggio competitivo.">
+    <meta property="og:title" content="Danilo Ferrante — Digital Strategist & AI Specialist">
+    <meta property="og:description" content="Aiuto le aziende a integrare l'intelligenza artificiale nei processi che contano.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/png" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta name="theme-color" content="#050505">
+
+    <!-- reCAPTCHA v2 — sostituisci YOUR_SITE_KEY con la tua chiave da https://www.google.com/recaptcha/admin -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --bg: #050505;
+            --surface: #0c0c0c;
+            --surface-2: #131313;
+            --text: #b8b4ac;
+            --text-bright: #e8e4dc;
+            --text-dim: #5a5750;
+            --accent: #4dffa3;
+            --accent-dim: rgba(77,255,163,0.12);
+            --accent-glow: rgba(77,255,163,0.06);
+            --red: #ff4d4d;
+            --border: rgba(200,196,188,0.07);
+            --border-accent: rgba(77,255,163,0.22);
+            --mono: 'IBM Plex Mono', monospace;
+            --serif: 'EB Garamond', Georgia, serif;
+            --sans: 'IBM Plex Sans', sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { font-size: 16px; scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Noise overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.022;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        ::-webkit-scrollbar { width: 2px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+        /* ===== CURSOR ===== */
+        .cursor {
+            position: fixed;
+            width: 7px; height: 7px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            transition: transform 0.1s ease;
+        }
+        .cursor-ring {
+            position: fixed;
+            width: 30px; height: 30px;
+            border: 1px solid rgba(77,255,163,0.35);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+        nav.scrolled {
+            background: rgba(5,5,5,0.9);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+        }
+        .nav-logo {
+            font-family: var(--mono);
+            font-size: 0.875rem;
+            color: var(--text-bright);
+            text-decoration: none;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0;
+            width: 0; height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--accent);
+            text-decoration: none;
+            border: 1px solid var(--border-accent);
+            padding: 0.5rem 1.25rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: background 0.3s ease;
+        }
+        .nav-cta:hover { background: var(--accent-dim); }
+
+        /* ===== HERO ===== */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        #neural-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            opacity: 0.65;
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            padding: 0 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .hero-label {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--accent);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.3s forwards;
+        }
+        .hero-label::before {
+            content: '';
+            width: 2rem; height: 1px;
+            background: var(--accent);
+        }
+        .hero-name {
+            font-family: var(--mono);
+            font-size: clamp(3.5rem, 9vw, 10rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 0.88;
+            letter-spacing: -0.025em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.5s forwards;
+        }
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+        }
+        .glitch::before {
+            color: var(--accent);
+            animation: glitchTop 4s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 38%, 0 38%);
+        }
+        .glitch::after {
+            color: var(--red);
+            animation: glitchBot 4s infinite;
+            clip-path: polygon(0 62%, 100% 62%, 100% 100%, 0 100%);
+        }
+        @keyframes glitchTop {
+            0%,88%,100% { transform: translate(0); opacity: 0; }
+            89% { transform: translate(-3px,1px); opacity: 0.9; }
+            91% { transform: translate(3px,-1px); opacity: 0.9; }
+            93% { transform: translate(-1px,2px); opacity: 0.9; }
+            95% { transform: translate(2px,-2px); opacity: 0.9; }
+            97% { transform: translate(0); opacity: 0; }
+        }
+        @keyframes glitchBot {
+            0%,90%,100% { transform: translate(0); opacity: 0; }
+            91% { transform: translate(3px,2px); opacity: 0.7; }
+            93% { transform: translate(-2px,-1px); opacity: 0.7; }
+            95% { transform: translate(1px,2px); opacity: 0.7; }
+            97% { transform: translate(0); opacity: 0; }
+        }
+        .hero-tagline {
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: clamp(1.375rem, 3vw, 2.75rem);
+            color: var(--text);
+            line-height: 1.35;
+            margin-bottom: 3rem;
+            max-width: 680px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.7s forwards;
+        }
+        .hero-tagline strong {
+            font-style: normal;
+            color: var(--text-bright);
+            font-weight: 500;
+        }
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.9s forwards;
+        }
+        .btn-primary {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--bg);
+            background: var(--accent);
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: background 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+        .btn-primary:hover { background: #2dffa0; transform: translateY(-2px); }
+        .btn-ghost {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            transition: color 0.3s ease;
+        }
+        .btn-ghost::after { content: '→'; transition: transform 0.3s ease; }
+        .btn-ghost:hover { color: var(--text-bright); }
+        .btn-ghost:hover::after { transform: translateX(5px); }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem; left: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--text-dim);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1.2s forwards;
+        }
+        .scroll-bar {
+            width: 1px; height: 3rem;
+            background: linear-gradient(to bottom, var(--text-dim), transparent);
+            animation: scrollPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes scrollPulse {
+            0%,100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.15); }
+        }
+        .hero-status {
+            position: absolute;
+            bottom: 2.5rem; right: 3rem;
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1.3s forwards;
+        }
+        .status-row { display: flex; align-items: center; gap: 0.5rem; justify-content: flex-end; }
+        .dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        @keyframes dotPulse {
+            0%,100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== SECTION BASE ===== */
+        .section-wrap {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 3rem;
+        }
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+        .s-num {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--accent);
+            letter-spacing: 0.2em;
+            white-space: nowrap;
+        }
+        .s-line { flex: 1; height: 1px; background: var(--border); }
+        .s-title {
+            font-family: var(--mono);
+            font-size: clamp(1.75rem, 3.5vw, 3.25rem);
+            color: var(--text-bright);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+        .d1 { transition-delay: 0.1s; }
+        .d2 { transition-delay: 0.2s; }
+        .d3 { transition-delay: 0.3s; }
+        .d4 { transition-delay: 0.4s; }
+
+        /* ===== SEPARATOR ===== */
+        .sep { width: 100%; height: 1px; background: var(--border); }
+
+        /* ===== ABOUT ===== */
+        #about { background: var(--bg); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 7rem;
+            align-items: start;
+        }
+        .about-left { position: sticky; top: 8rem; }
+        .portrait-box {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            position: relative;
+            transition: border-color 0.5s ease;
+        }
+        .portrait-box:hover { border-color: var(--border-accent); }
+        /* top accent bar */
+        .portrait-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+            z-index: 3;
+        }
+        .portrait-box:hover::before { transform: scaleX(1); }
+        /* corner brackets */
+        .portrait-box::after {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(77,255,163,0.08);
+            pointer-events: none;
+            z-index: 3;
+            transition: border-color 0.4s ease;
+        }
+        .portrait-box:hover::after { border-color: rgba(77,255,163,0.18); }
+        .portrait-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 12%;
+            display: block;
+            filter: grayscale(80%) contrast(1.15) brightness(0.58);
+            transition: filter 0.6s ease, transform 0.6s ease;
+        }
+        .portrait-box:hover .portrait-img {
+            filter: grayscale(50%) contrast(1.1) brightness(0.7);
+            transform: scale(1.02);
+        }
+        .portrait-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom,
+                    rgba(5,5,5,0.08) 0%,
+                    rgba(5,5,5,0.0) 35%,
+                    rgba(5,5,5,0.45) 75%,
+                    rgba(5,5,5,0.88) 100%
+                ),
+                linear-gradient(135deg,
+                    rgba(77,255,163,0.04) 0%,
+                    transparent 55%
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        /* scanlines texture */
+        .portrait-scanlines {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(0,0,0,0.06) 3px,
+                rgba(0,0,0,0.06) 4px
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+        /* caption at bottom */
+        .portrait-caption {
+            position: absolute;
+            bottom: 1.25rem;
+            left: 1.25rem;
+            right: 1.25rem;
+            font-family: var(--mono);
+            font-size: 0.5625rem;
+            color: rgba(77,255,163,0.5);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            z-index: 3;
+        }
+        .meta-list { display: flex; flex-direction: column; }
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+        }
+        .meta-k { color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; }
+        .meta-v { color: var(--text-bright); }
+        .meta-v.green { color: var(--accent); }
+
+        .about-statement {
+            font-family: var(--serif);
+            font-size: clamp(1.375rem, 2.2vw, 2rem);
+            color: var(--text-bright);
+            font-style: italic;
+            line-height: 1.45;
+            margin-bottom: 2.5rem;
+        }
+        .about-statement em { font-style: normal; color: var(--accent); }
+        .about-body { font-size: 0.9375rem; line-height: 1.85; }
+        .about-body p + p { margin-top: 1.4rem; }
+        .about-body a { color: var(--accent); text-decoration: none; }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+        .tag {
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--accent);
+            border: 1px solid var(--border-accent);
+            padding: 0.3rem 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: var(--accent-glow);
+        }
+
+        /* ===== STATS ===== */
+        #stats { background: var(--surface); }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+        .stat-cell {
+            background: var(--surface);
+            padding: 3rem 2.5rem;
+            border: 1px solid transparent;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .stat-cell:hover {
+            border-color: var(--border-accent);
+            background: var(--accent-glow);
+        }
+        .stat-num {
+            font-family: var(--mono);
+            font-size: clamp(2.75rem, 4.5vw, 4.5rem);
+            color: var(--text-bright);
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+        }
+        .stat-num span { color: var(--accent); }
+        .stat-lbl {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            line-height: 1.6;
+        }
+
+        /* ===== SERVICES ===== */
+        #services { background: var(--bg); }
+        .svc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+        .svc-card {
+            background: var(--bg);
+            padding: 3.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s ease;
+        }
+        .svc-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        .svc-card:hover::before { transform: scaleX(1); }
+        .svc-card:hover { background: var(--surface); }
+        .svc-idx {
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--accent);
+            letter-spacing: 0.25em;
+            margin-bottom: 2rem;
+        }
+        .svc-icon {
+            width: 44px; height: 44px;
+            margin-bottom: 2rem;
+        }
+        .svc-icon svg {
+            width: 100%; height: 100%;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .svc-name {
+            font-family: var(--mono);
+            font-size: 1.1875rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+        .svc-desc {
+            font-size: 0.9375rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+        .svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        .svc-list li {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--text-dim);
+            padding-left: 1.5rem;
+            position: relative;
+            letter-spacing: 0.04em;
+            line-height: 1.5;
+        }
+        .svc-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* ===== MANIFESTO ===== */
+        #manifesto {
+            background: var(--surface);
+            text-align: center;
+            padding: 9rem 3rem;
+        }
+        .manifesto-q {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 5rem);
+            color: var(--text-bright);
+            font-style: italic;
+            line-height: 1.2;
+            max-width: 880px;
+            margin: 0 auto 1.75rem;
+        }
+        .manifesto-q em {
+            font-style: normal;
+            color: var(--accent);
+        }
+        .t-cursor {
+            display: inline-block;
+            width: 3px; height: 0.85em;
+            background: var(--accent);
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+        .manifesto-sub {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--text-dim);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* ===== APPROACH ===== */
+        #approach { background: var(--bg); }
+        .approach-lead {
+            font-family: var(--serif);
+            font-size: clamp(1.125rem, 1.8vw, 1.625rem);
+            color: var(--text);
+            font-style: italic;
+            line-height: 1.75;
+            max-width: 760px;
+            margin-bottom: 5rem;
+        }
+        .steps { display: flex; flex-direction: column; }
+        .step {
+            display: grid;
+            grid-template-columns: 7rem 1fr 3rem;
+            align-items: start;
+            gap: 3rem;
+            padding: 2.75rem 0;
+            border-top: 1px solid var(--border);
+            transition: padding-left 0.35s ease;
+        }
+        .step:hover { padding-left: 1rem; }
+        .step-code {
+            font-family: var(--mono);
+            font-size: 0.6875rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            padding-top: 0.2rem;
+            line-height: 1.6;
+        }
+        .step-title {
+            font-family: var(--mono);
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.875rem;
+        }
+        .step-desc { font-size: 0.9375rem; color: var(--text); line-height: 1.8; max-width: 580px; }
+        .step-arr {
+            font-family: var(--mono);
+            font-size: 1.25rem;
+            color: var(--border);
+            padding-top: 0.2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .step:hover .step-arr { color: var(--accent); transform: translateX(8px); }
+
+        /* ===== CONTACT ===== */
+        #contact { background: var(--bg); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+        .contact-hl {
+            font-family: var(--mono);
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: -0.035em;
+            line-height: 0.92;
+            margin-bottom: 2rem;
+        }
+        .contact-hl .ac { display: block; color: var(--accent); }
+        .contact-desc {
+            font-size: 0.9375rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 440px;
+        }
+        .clinks { display: flex; flex-direction: column; gap: 0.75rem; }
+        .clink {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.875rem 1.25rem;
+            border: 1px solid var(--border);
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+        .clink:hover {
+            border-color: var(--border-accent);
+            color: var(--text-bright);
+            background: var(--accent-glow);
+            transform: translateX(5px);
+        }
+        .clink-ico { color: var(--accent); }
+
+        .form { display: flex; flex-direction: column; gap: 1.375rem; }
+        .fg { display: flex; flex-direction: column; gap: 0.5rem; }
+        .fg label {
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--text-dim);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+        .fg input, .fg textarea, .fg select {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-bright);
+            font-family: var(--sans);
+            font-size: 0.9375rem;
+            padding: 0.875rem 1.125rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+        .fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--border-accent); }
+        .fg textarea { resize: vertical; min-height: 130px; }
+        .fg select { appearance: none; cursor: pointer; }
+        .fg input::placeholder, .fg textarea::placeholder { color: var(--text-dim); }
+        .form-btn {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--bg);
+            background: var(--accent);
+            border: none;
+            padding: 1rem 2.5rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .form-btn:hover { background: #2dffa0; transform: translateY(-2px); }
+
+        /* ===== REVIEWS ===== */
+        #reviews { background: var(--surface); }
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+        }
+        .review-card {
+            background: var(--surface);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+        .review-card:hover { background: var(--surface-2); }
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: 1.5rem; right: 2rem;
+            font-family: var(--serif);
+            font-size: 6rem;
+            color: var(--accent);
+            opacity: 0.12;
+            line-height: 1;
+        }
+        .review-stars {
+            display: flex;
+            gap: 0.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .review-stars span {
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+        .review-text {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+        .review-author {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        .review-name {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text-bright);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .review-role {
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--text-dim);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        @media (max-width: 1024px) {
+            .reviews-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .f-logo {
+            font-family: var(--mono);
+            font-size: 0.875rem;
+            color: var(--text-bright);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .f-logo span { color: var(--accent); }
+        .f-copy {
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+        .f-links { display: flex; gap: 1.5rem; }
+        .f-links a {
+            font-family: var(--mono);
+            font-size: 0.625rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+        .f-links a:hover { color: var(--accent); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+            .about-left { position: static; }
+            .portrait-box { aspect-ratio: 3/4; max-width: 320px; }
+            .svc-grid { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; gap: 4rem; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1.25rem 1.5rem; }
+            .nav-links { display: none; }
+            .section-wrap { padding: 5rem 1.5rem; }
+            #manifesto { padding: 6rem 1.5rem; }
+            footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+            .step { grid-template-columns: 1fr; gap: 1rem; }
+            .step-arr { display: none; }
+            .stats-row { grid-template-columns: repeat(2,1fr); }
+            .hero-inner { padding: 0 1.5rem; }
+            .hero-scroll, .hero-status { display: none; }
+            .portrait-box { max-width: 280px; aspect-ratio: 3/4; }
+            .g-recaptcha { transform: scale(0.85); transform-origin: left; }
+        }
+
+        /* ===== reCAPTCHA DARK THEME ===== */
+        .recaptcha-wrap {
+            margin: 0.5rem 0 0.25rem;
+        }
+        .recaptcha-wrap .g-recaptcha > div {
+            border-radius: 0 !important;
+        }
+        .recaptcha-note {
+            font-family: var(--mono);
+            font-size: 0.5625rem;
+            color: var(--text-dim);
+            letter-spacing: 0.08em;
+            margin-top: 0.5rem;
+        }
+        .recaptcha-note a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+    <a href="#" class="nav-logo">DF<span>.</span></a>
+    <ul class="nav-links">
+        <li><a href="#about">Chi sono</a></li>
+        <li><a href="#services">Servizi</a></li>
+        <li><a href="#approach">Metodo</a></li>
+        <li><a href="#contact">Contatto</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Parliamo →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <canvas id="neural-canvas"></canvas>
+    <div class="hero-inner">
+        <div class="hero-label">Digital Strategist · AI Integration Specialist</div>
+        <h1 class="hero-name">
+            <span class="glitch" data-text="DANILO">DANILO</span><br>
+            <span class="glitch" data-text="FERRANTE">FERRANTE</span>
+        </h1>
+        <p class="hero-tagline">
+            Trasformo l'<strong>intelligenza artificiale</strong><br>
+            da buzzword a <strong>vantaggio competitivo concreto</strong>.
+        </p>
+        <div class="hero-actions">
+            <a href="#contact" class="btn-primary">Inizia il progetto</a>
+            <a href="#services" class="btn-ghost">Scopri i servizi</a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <div class="scroll-bar"></div>
+        <span>Scroll</span>
+    </div>
+    <div class="hero-status">
+        <div class="status-row"><div class="dot"></div><span>Disponibile per nuovi progetti</span></div>
+        <div class="status-row"><span>Roma · Italia</span></div>
+    </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="section-wrap">
+        <div class="section-head reveal">
+            <span class="s-num">[01]</span>
+            <div class="s-line"></div>
+            <h2 class="s-title">Chi sono</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-left">
+                <div class="portrait-box reveal">
+                    <!-- Sostituisci photo.jpg con photo_beach.jpg quando carichi la foto spiaggia -->
+                    <img class="portrait-img" src="photo.jpg" alt="Danilo Ferrante — Digital Strategist & AI Specialist">
+                    <div class="portrait-overlay"></div>
+                    <div class="portrait-scanlines"></div>
+                    <div class="portrait-caption">// Danilo Ferrante · Roma</div>
+                </div>
+                <div class="meta-list reveal d1">
+                    <div class="meta-row">
+                        <span class="meta-k">Status</span>
+                        <span class="meta-v green">● Attivo</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-k">Ruolo</span>
+                        <span class="meta-v">Digital Strategist</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-k">Focus</span>
+                        <span class="meta-v">AI Integration</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-k">Sede</span>
+                        <span class="meta-v">Roma, IT</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-k">Esperienza</span>
+                        <span class="meta-v">7+ anni</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-right">
+                <p class="about-statement reveal">
+                    "Non sono qui per vendere <em>hype</em>.<br>
+                    Sono qui per costruire <em>risultati</em>."
+                </p>
+                <div class="about-body reveal d1">
+                    <p>Sono un Digital Strategist con oltre 7 anni di esperienza nell'accompagnare aziende e professionisti nella trasformazione digitale. Oggi mi specializzo nell'integrazione pratica dell'intelligenza artificiale nei processi aziendali: non come tecnologia fine a sé stessa, ma come leva strategica per crescere, ottimizzare e competere.</p>
+                    <p>Ho lavorato con PMI, startup e grandi brand su progetti di marketing digitale, posizionamento e automazione. L'IA ha cambiato le regole del gioco — e il mio lavoro è aiutare le aziende a capire esattamente come e dove usarla per ottenere risultati misurabili.</p>
+                    <p>Basato a Roma, lavoro con clienti in tutta Italia e online. Il mio approccio è chirurgico: prima capisco il tuo business, poi costruiamo insieme la roadmap AI più adatta a te. Niente soluzioni preconfezionate. Solo strategia su misura.</p>
+                </div>
+                <div class="tags reveal d2">
+                    <span class="tag">AI Strategy</span>
+                    <span class="tag">Marketing Digitale</span>
+                    <span class="tag">Automazione</span>
+                    <span class="tag">ChatGPT / Claude</span>
+                    <span class="tag">Prompt Engineering</span>
+                    <span class="tag">Workflow AI</span>
+                    <span class="tag">Business Strategy</span>
+                    <span class="tag">Digital Transformation</span>
+                    <span class="tag">AI Agents</span>
+                    <span class="tag">LLM Integration</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section id="stats" style="background: var(--surface); padding: 0;">
+    <div style="max-width:1400px; margin:0 auto; padding:5rem 3rem;">
+        <div class="stats-row">
+            <div class="stat-cell reveal">
+                <div class="stat-num"><span class="counter" data-to="7">0</span><span>+</span></div>
+                <div class="stat-lbl">Anni di<br>esperienza digitale</div>
+            </div>
+            <div class="stat-cell reveal d1">
+                <div class="stat-num"><span class="counter" data-to="30">0</span><span>+</span></div>
+                <div class="stat-lbl">Progetti AI<br>completati</div>
+            </div>
+            <div class="stat-cell reveal d2">
+                <div class="stat-num"><span class="counter" data-to="20">0</span><span>+</span></div>
+                <div class="stat-lbl">Aziende<br>trasformate</div>
+            </div>
+            <div class="stat-cell reveal d3">
+                <div class="stat-num"><span class="counter" data-to="95">0</span><span>%</span></div>
+                <div class="stat-lbl">Clienti<br>soddisfatti</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--bg);">
+    <div class="section-wrap">
+        <div class="section-head reveal">
+            <span class="s-num">[02]</span>
+            <div class="s-line"></div>
+            <h2 class="s-title">Servizi</h2>
+        </div>
+        <div class="svc-grid">
+            <div class="svc-card reveal">
+                <div class="svc-idx">[SVC_01]</div>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                    </svg>
+                </div>
+                <h3 class="svc-name">AI Strategy</h3>
+                <p class="svc-desc">Definisco la roadmap AI personalizzata per la tua azienda. Identifico le aree dove l'intelligenza artificiale genera il massimo valore e costruisco un piano d'azione concreto e misurabile.</p>
+                <ul class="svc-list">
+                    <li>AI Readiness Assessment</li>
+                    <li>Identificazione opportunità AI</li>
+                    <li>Roadmap strategica 90/180 giorni</li>
+                    <li>KPI e misurazione ROI</li>
+                </ul>
+            </div>
+            <div class="svc-card reveal d1">
+                <div class="svc-idx">[SVC_02]</div>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="3" width="20" height="14" rx="2"/>
+                        <path d="M8 21h8M12 17v4"/>
+                        <path d="M7 8l3 3-3 3M13 14h4"/>
+                    </svg>
+                </div>
+                <h3 class="svc-name">AI Implementation</h3>
+                <p class="svc-desc">Integro gli strumenti AI giusti nei processi aziendali: automazione dei flussi, ottimizzazione del marketing, gestione delle comunicazioni e molto altro.</p>
+                <ul class="svc-list">
+                    <li>Automazione workflow con AI</li>
+                    <li>Integrazione LLM nei processi</li>
+                    <li>AI per marketing e contenuti</li>
+                    <li>Setup e ottimizzazione strumenti</li>
+                </ul>
+            </div>
+            <div class="svc-card reveal d2">
+                <div class="svc-idx">[SVC_03]</div>
+                <div class="svc-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3 class="svc-name">AI Training</h3>
+                <p class="svc-desc">Formo il tuo team per usare l'intelligenza artificiale in modo efficace. Workshop pratici, hands-on, con focus sugli strumenti e i casi d'uso concreti per il tuo settore.</p>
+                <ul class="svc-list">
+                    <li>Workshop pratici (hands-on)</li>
+                    <li>Prompt Engineering per il team</li>
+                    <li>AI Tools per il tuo settore</li>
+                    <li>Onboarding e supporto continuo</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+    <div class="manifesto-q reveal">
+        "L'IA non sostituisce le persone.<br>
+        <em>Amplifica</em> quelle che la usano."
+        <span class="t-cursor"></span>
+    </div>
+    <p class="manifesto-sub reveal d1">— Il mio approccio all'intelligenza artificiale</p>
+</section>
+
+<div class="sep"></div>
+
+<!-- APPROACH -->
+<section id="approach" style="background:var(--bg);">
+    <div class="section-wrap">
+        <div class="section-head reveal">
+            <span class="s-num">[03]</span>
+            <div class="s-line"></div>
+            <h2 class="s-title">Il metodo</h2>
+        </div>
+        <p class="approach-lead reveal">
+            Ogni integrazione AI inizia con una domanda semplice:<br>
+            <em>"Cosa vuoi ottenere, concretamente?"</em>
+        </p>
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-code">[01]<br>ANALISI</div>
+                <div>
+                    <h3 class="step-title">Capire il business</h3>
+                    <p class="step-desc">Prima di qualsiasi strumento AI, devo capire il tuo business: processi, obiettivi, punti di frizione, team, budget. L'IA è una risposta — prima serve la domanda giusta.</p>
+                </div>
+                <div class="step-arr">→</div>
+            </div>
+            <div class="step reveal d1">
+                <div class="step-code">[02]<br>STRATEGIA</div>
+                <div>
+                    <h3 class="step-title">Costruire la roadmap</h3>
+                    <p class="step-desc">Definisco una roadmap realistica e prioritizzata. Partendo dai quick wins fino agli obiettivi di trasformazione più ampi. Niente complessità fine a sé stessa.</p>
+                </div>
+                <div class="step-arr">→</div>
+            </div>
+            <div class="step reveal d2">
+                <div class="step-code">[03]<br>INTEGRAZIONE</div>
+                <div>
+                    <h3 class="step-title">Implementare gli strumenti giusti</h3>
+                    <p class="step-desc">Seleziono e integro gli strumenti AI più adatti al tuo contesto. Non quelli di moda — quelli che funzionano per te. Ogni scelta è giustificata dai dati e dagli obiettivi.</p>
+                </div>
+                <div class="step-arr">→</div>
+            </div>
+            <div class="step reveal d3">
+                <div class="step-code">[04]<br>MISURAZIONE</div>
+                <div>
+                    <h3 class="step-title">Misurare e ottimizzare</h3>
+                    <p class="step-desc">Tracciamo i risultati, analizziamo i dati, ottimizziamo continuamente. Il valore dell'AI si misura in numeri reali: tempo risparmiato, ricavi generati, costi ridotti.</p>
+                </div>
+                <div class="step-arr">→</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+    <div class="section-wrap">
+        <div class="section-head reveal">
+            <span class="s-num">[04]</span>
+            <div class="s-line"></div>
+            <h2 class="s-title">Recensioni</h2>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card reveal">
+                <div class="review-stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="review-text">
+                    "Danilo ha trasformato il modo in cui gestiamo i contenuti sui social. In pochi mesi abbiamo triplicato l'engagement e costruito una community reale attorno al nostro brand. Professionista serio, risultati concreti."
+                </p>
+                <div class="review-author">
+                    <span class="review-name">Alessandro Pepe</span>
+                    <span class="review-role">Founder & Owner · Roscioli New York, Rimessa Roscioli, Rimessa Fab</span>
+                </div>
+            </div>
+            <div class="review-card reveal d1">
+                <div class="review-stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="review-text">
+                    "Avevamo bisogno di qualcuno che capisse davvero il digitale e sapesse tradurlo in strategia concreta. Danilo l'ha fatto subito, con una chiarezza che raramente trovi in questo settore. Lo consiglio senza esitazione."
+                </p>
+                <div class="review-author">
+                    <span class="review-name">Marco Santi</span>
+                    <span class="review-role">Founder · Virtual Vertex</span>
+                </div>
+            </div>
+            <div class="review-card reveal d2">
+                <div class="review-stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="review-text">
+                    "Workshop sull'AI assolutamente pratico e applicato. Il team ha imparato a usare strumenti che usiamo ogni giorno. Non teoria astratta: casi concreti, immediati, per il nostro settore. Un investimento con ritorno immediato."
+                </p>
+                <div class="review-author">
+                    <span class="review-name">Chiara Manzo</span>
+                    <span class="review-role">Medico · Campus Bio-Medico</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg);">
+    <div class="section-wrap">
+        <div class="section-head reveal">
+            <span class="s-num">[05]</span>
+            <div class="s-line"></div>
+            <h2 class="s-title">Contatto</h2>
+        </div>
+        <div class="contact-grid">
+            <div>
+                <h3 class="contact-hl reveal">
+                    Pronto a<br>
+                    integrare<br>
+                    <span class="ac">l'AI?</span>
+                </h3>
+                <p class="contact-desc reveal d1">
+                    Parliamo del tuo progetto. Una call esplorativa gratuita di 30 minuti per capire le tue esigenze e vedere insieme se e come posso aiutarti.
+                </p>
+                <div class="clinks reveal d2">
+                    <a href="mailto:ferrdanilo88@gmail.com" class="clink">
+                        <span class="clink-ico">✉</span>
+                        <span>ferrdanilo88@gmail.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/danilo-ferrante-a426061b5/" target="_blank" class="clink">
+                        <span class="clink-ico">in</span>
+                        <span>linkedin.com/in/danilo-ferrante</span>
+                    </a>
+                    <a href="https://www.daniferr.com" target="_blank" class="clink">
+                        <span class="clink-ico">@</span>
+                        <span>daniferr.com</span>
+                    </a>
+                </div>
+            </div>
+            <div class="reveal d1">
+                <!-- Formspree endpoint: https://formspree.io/f/xoverbqv -->
+                <form class="form" id="contact-form">
+                    <div class="fg">
+                        <label for="f-name">Nome</label>
+                        <input type="text" id="f-name" name="name" placeholder="Mario Rossi" required>
+                    </div>
+                    <div class="fg">
+                        <label for="f-email">Email</label>
+                        <input type="email" id="f-email" name="email" placeholder="mario@azienda.it" required>
+                    </div>
+                    <div class="fg">
+                        <label for="f-company">Azienda</label>
+                        <input type="text" id="f-company" name="azienda" placeholder="Nome Azienda">
+                    </div>
+                    <div class="fg">
+                        <label for="f-service">Interesse</label>
+                        <select id="f-service" name="servizio">
+                            <option value="">Seleziona un servizio…</option>
+                            <option>AI Strategy</option>
+                            <option>AI Implementation</option>
+                            <option>AI Training</option>
+                            <option>Altro</option>
+                        </select>
+                    </div>
+                    <div class="fg">
+                        <label for="f-msg">Messaggio</label>
+                        <textarea id="f-msg" name="messaggio" placeholder="Descrivimi il tuo progetto o le tue sfide…" required></textarea>
+                    </div>
+                    <!-- honeypot anti-spam -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    <!-- reCAPTCHA v2 dark — ottieni la tua site key su https://www.google.com/recaptcha/admin -->
+                    <div class="recaptcha-wrap">
+                        <div class="g-recaptcha"
+                             data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                             data-theme="dark"
+                             data-size="normal"></div>
+                        <p class="recaptcha-note">
+                            ⚠ Sostituisci la site key di test su <a href="https://www.google.com/recaptcha/admin" target="_blank">google.com/recaptcha</a>
+                        </p>
+                    </div>
+                    <button type="submit" class="form-btn" id="form-btn">Invia messaggio →</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="f-logo">DF<span>.</span></div>
+    <div class="f-copy">
+        © 2025 Danilo Ferrante — Digital Strategist & AI Specialist<br>
+        <span style="font-size:0.5625rem;opacity:0.4">Roma · Tutti i diritti riservati</span>
+    </div>
+    <div class="f-links">
+        <a href="https://www.linkedin.com/in/danilo-ferrante-a426061b5/" target="_blank">LinkedIn</a>
+        <a href="mailto:ferrdanilo88@gmail.com">Email</a>
+        <a href="privacy.html">Privacy</a>
+    </div>
+</footer>
+
+<script>
+/* ========== NEURAL NETWORK ========== */
+const canvas = document.getElementById('neural-canvas');
+const ctx = canvas.getContext('2d');
+let nodes = [], mouse = { x: null, y: null }, raf;
+
+function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+
+class Node {
+    constructor() {
+        this.x  = Math.random() * canvas.width;
+        this.y  = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.38;
+        this.vy = (Math.random() - 0.5) * 0.38;
+        this.r  = Math.random() * 1.8 + 0.8;
+        this.op = Math.random() * 0.45 + 0.2;
+        this.ph = Math.random() * Math.PI * 2;
+        this.ps = Math.random() * 0.018 + 0.008;
+    }
+    tick() {
+        this.ph += this.ps;
+        if (mouse.x !== null) {
+            const dx = mouse.x - this.x, dy = mouse.y - this.y;
+            const d  = Math.hypot(dx, dy);
+            if (d < 170) {
+                const f = (170 - d) / 170 * 0.0012;
+                this.vx += dx * f;
+                this.vy += dy * f;
+            }
+        }
+        this.vx *= 0.99; this.vy *= 0.99;
+        this.x  += this.vx; this.y  += this.vy;
+        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height)  this.vy *= -1;
+        this.x = Math.max(0, Math.min(canvas.width,  this.x));
+        this.y = Math.max(0, Math.min(canvas.height, this.y));
+    }
+    draw() {
+        const pulse = Math.sin(this.ph);
+        const r = this.r + pulse * 0.4;
+        const o = this.op + pulse * 0.08;
+        ctx.save();
+        ctx.globalAlpha = o;
+        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, r * 7);
+        g.addColorStop(0, 'rgba(77,255,163,.9)');
+        g.addColorStop(1, 'rgba(77,255,163,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(this.x, this.y, r * 7, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(77,255,163,1)';
+        ctx.beginPath(); ctx.arc(this.x, this.y, r, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+    }
+}
+
+function links() {
+    const max = 155;
+    for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+            const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
+            if (d < max) {
+                ctx.save();
+                ctx.globalAlpha = (1 - d / max) * 0.22;
+                ctx.strokeStyle = 'rgba(77,255,163,1)';
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+    }
+}
+
+function init() {
+    const n = Math.min(Math.floor(canvas.width * canvas.height / 14000), 90);
+    nodes = Array.from({ length: n }, () => new Node());
+}
+
+function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    links();
+    nodes.forEach(n => { n.tick(); n.draw(); });
+    raf = requestAnimationFrame(loop);
+}
+
+window.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left;
+    mouse.y = e.clientY - r.top;
+});
+window.addEventListener('resize', () => { resize(); init(); });
+resize(); init(); loop();
+
+/* ========== CURSOR ========== */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let rx = 0, ry = 0, cx = 0, cy = 0;
+
+document.addEventListener('mousemove', e => {
+    cx = e.clientX; cy = e.clientY;
+    cur.style.left = cx + 'px';
+    cur.style.top  = cy + 'px';
+});
+(function curLoop() {
+    rx += (cx - rx) * 0.13;
+    ry += (cy - ry) * 0.13;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(curLoop);
+})();
+document.querySelectorAll('a,button,.svc-card,.stat-cell,.step').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        cur.style.transform = 'translate(-50%,-50%) scale(2.5)';
+        ring.style.width = '56px'; ring.style.height = '56px';
+        ring.style.borderColor = 'rgba(77,255,163,.55)';
+    });
+    el.addEventListener('mouseleave', () => {
+        cur.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.width = '30px'; ring.style.height = '30px';
+        ring.style.borderColor = 'rgba(77,255,163,.35)';
+    });
+});
+
+/* ========== NAV SCROLL ========== */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ========== REVEAL ON SCROLL ========== */
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ========== COUNTER ========== */
+const cObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting || e.target._done) return;
+        e.target._done = true;
+        const to = +e.target.dataset.to, dur = 1600;
+        const t0 = performance.now();
+        (function step(now) {
+            const p = Math.min((now - t0) / dur, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            e.target.textContent = Math.floor(ease * to);
+            if (p < 1) requestAnimationFrame(step);
+            else e.target.textContent = to;
+        })(t0);
+    });
+}, { threshold: 0.6 });
+document.querySelectorAll('.counter').forEach(el => cObs.observe(el));
+
+/* ========== FORM SUBMIT — Formspree ========== */
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('form-btn');
+
+    // reCAPTCHA check
+    if (typeof grecaptcha !== 'undefined') {
+        const token = grecaptcha.getResponse();
+        if (!token) {
+            btn.textContent = '⚠ Completa il reCAPTCHA';
+            btn.style.background = '#ff4d4d';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+                btn.textContent = 'Invia messaggio →';
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 3000);
+            return;
+        }
+    }
+
+    btn.textContent = 'Invio in corso…';
+    btn.disabled = true;
+
+    const data = new FormData(this);
+    try {
+        const res = await fetch('https://formspree.io/f/xoverbqv', {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+            btn.textContent = '✓ Inviato — ti rispondo presto';
+            btn.style.background = '#2dffa0';
+            this.reset();
+            if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+            setTimeout(() => {
+                btn.textContent = 'Invia messaggio →';
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 5000);
+        } else {
+            throw new Error('Errore invio');
+        }
+    } catch {
+        btn.textContent = '✗ Errore — riprova';
+        btn.style.background = '#ff4d4d';
+        btn.style.color = '#fff';
+        btn.disabled = false;
+        setTimeout(() => {
+            btn.textContent = 'Invia messaggio →';
+            btn.style.background = '';
+            btn.style.color = '';
+        }, 4000);
+    }
+});
+
+/* ========== SMOOTH SCROLL ========== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+});
+</script>
+</body>
+</html>
