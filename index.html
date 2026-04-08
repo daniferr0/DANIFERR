@@ -937,10 +937,18 @@
             .step { grid-template-columns: 1fr; gap: 1rem; }
             .step-arr { display: none; }
             .stats-row { grid-template-columns: repeat(2,1fr); }
-            .hero-inner { padding: 0 1.5rem; }
+            .hero-inner { padding: 7rem 1.5rem 0; }
+            .hero-name { font-size: clamp(3rem, 16vw, 6rem); }
+            .hero-tagline { font-size: 1.125rem; }
             .hero-scroll, .hero-status { display: none; }
             .portrait-box { max-width: 280px; aspect-ratio: 3/4; }
+            .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
             .g-recaptcha { transform: scale(0.85); transform-origin: left; }
+        }
+        @media (max-width: 480px) {
+            .hero-name { font-size: 3rem; }
+            .svc-card { padding: 2.5rem 1.75rem; }
+            .stat-cell { padding: 2rem 1.5rem; }
         }
 
         /* ===== reCAPTCHA DARK THEME ===== */
@@ -972,6 +980,7 @@
         <li><a href="#about">Chi sono</a></li>
         <li><a href="#services">Servizi</a></li>
         <li><a href="#approach">Metodo</a></li>
+        <li><a href="digital-marketing.html">Digital Marketing →</a></li>
         <li><a href="#contact">Contatto</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Parliamo →</a>
