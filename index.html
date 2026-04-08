@@ -14,9 +14,6 @@
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta name="theme-color" content="#050505">
 
-    <!-- reCAPTCHA v2 — sostituisci YOUR_SITE_KEY con la tua chiave da https://www.google.com/recaptcha/admin -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,600;1,300&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1321,8 +1318,8 @@
                 </div>
             </div>
             <div class="reveal d1">
-                <!-- Formspree endpoint: https://formspree.io/f/xoverbqv -->
-                <form class="form" id="contact-form">
+                <form class="form" id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
+                    <input type="hidden" name="form-name" value="contact">
                     <div class="fg">
                         <label for="f-name">Nome</label>
                         <input type="text" id="f-name" name="name" placeholder="Mario Rossi" required>
@@ -1352,10 +1349,7 @@
                     <!-- honeypot anti-spam -->
                     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
                     <div class="recaptcha-wrap">
-                        <div class="g-recaptcha"
-                             data-sitekey="6Leynq0sAAAAACaLeey113ND0wCQ4J7493aCEDTx"
-                             data-theme="dark"
-                             data-size="normal"></div>
+                        <div data-netlify-recaptcha="true"></div>
                     </div>
                     <button type="submit" class="form-btn" id="form-btn">Invia messaggio →</button>
                 </form>
@@ -1535,12 +1529,12 @@ const cObs = new IntersectionObserver(entries => {
 }, { threshold: 0.6 });
 document.querySelectorAll('.counter').forEach(el => cObs.observe(el));
 
-/* ========== FORM SUBMIT — Formspree ========== */
+/* ========== FORM SUBMIT — Netlify Forms ========== */
 document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('form-btn');
 
-    // reCAPTCHA check
+    // reCAPTCHA client-side check (UX — verifica vera avviene server-side su Netlify)
     if (typeof grecaptcha !== 'undefined') {
         const token = grecaptcha.getResponse();
         if (!token) {
@@ -1559,12 +1553,11 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     btn.textContent = 'Invio in corso…';
     btn.disabled = true;
 
-    const data = new FormData(this);
     try {
-        const res = await fetch('https://formspree.io/f/xoverbqv', {
+        const res = await fetch('/', {
             method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(this)).toString()
         });
         if (res.ok) {
             btn.textContent = '✓ Inviato — ti rispondo presto';
@@ -1577,7 +1570,7 @@ document.getElementById('contact-form').addEventListener('submit', async functio
                 btn.disabled = false;
             }, 5000);
         } else {
-            throw new Error('Errore invio');
+            throw new Error();
         }
     } catch {
         btn.textContent = '✗ Errore — riprova';
