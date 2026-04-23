@@ -1147,11 +1147,20 @@ function init() {
     nodes = Array.from({ length: n }, () => new Node());
 }
 
+let animating = true, raf;
+
 function loop() {
+    if (!animating) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     links(); nodes.forEach(n => { n.tick(); n.draw(); });
-    requestAnimationFrame(loop);
+    raf = requestAnimationFrame(loop);
 }
+
+new IntersectionObserver(entries => {
+    animating = entries[0].isIntersecting;
+    if (animating) { raf = requestAnimationFrame(loop); }
+    else { cancelAnimationFrame(raf); raf = null; }
+}, { threshold: 0.01 }).observe(document.getElementById('hero'));
 
 window.addEventListener('mousemove', e => {
     const r = canvas.getBoundingClientRect();

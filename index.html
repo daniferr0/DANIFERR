@@ -16,6 +16,37 @@
     <meta name="twitter:image" content="https://daniferr.com/photo.jpg">
     <link rel="canonical" href="https://daniferr.com/">
 
+    <!-- Structured Data — Person (Google Knowledge Graph) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Danilo Ferrante",
+      "url": "https://daniferr.com",
+      "email": "ferrdanilo88@gmail.com",
+      "jobTitle": "Digital Strategist & AI Specialist",
+      "description": "Digital Strategist specializzato nell'integrazione dell'intelligenza artificiale per le aziende. Trasformo l'IA da buzzword a vantaggio competitivo.",
+      "image": "https://daniferr.com/photo.jpg",
+      "sameAs": [
+        "https://www.linkedin.com/in/danilo-ferrante-a426061b5/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Roma",
+        "addressCountry": "IT"
+      },
+      "knowsAbout": [
+        "Intelligenza Artificiale", "AI Integration", "Digital Strategy",
+        "Machine Learning", "Automazione Aziendale", "Prompt Engineering"
+      ],
+      "offers": {
+        "@type": "Service",
+        "name": "Consulenza AI per Aziende",
+        "description": "Strategia, implementazione e formazione sull'intelligenza artificiale per aziende italiane"
+      }
+    }
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="alternate icon" type="image/png" href="favicon.svg">
@@ -1463,12 +1494,22 @@ function init() {
     nodes = Array.from({ length: n }, () => new Node());
 }
 
+let animating = true;
+
 function loop() {
+    if (!animating) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     links();
     nodes.forEach(n => { n.tick(); n.draw(); });
     raf = requestAnimationFrame(loop);
 }
+
+// Pausa canvas quando hero esce dalla viewport → risparmio CPU
+new IntersectionObserver(entries => {
+    animating = entries[0].isIntersecting;
+    if (animating) { raf = requestAnimationFrame(loop); }
+    else { cancelAnimationFrame(raf); raf = null; }
+}, { threshold: 0.01 }).observe(document.getElementById('hero'));
 
 window.addEventListener('mousemove', e => {
     const r = canvas.getBoundingClientRect();
