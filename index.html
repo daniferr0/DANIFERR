@@ -7,6 +7,14 @@
     <meta name="description" content="Digital Strategist specializzato nell'integrazione dell'intelligenza artificiale per le aziende. Trasformo l'IA da buzzword a vantaggio competitivo.">
     <meta property="og:title" content="Danilo Ferrante — Digital Strategist & AI Specialist">
     <meta property="og:description" content="Aiuto le aziende a integrare l'intelligenza artificiale nei processi che contano.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://daniferr.com/">
+    <meta property="og:image" content="https://daniferr.com/photo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Danilo Ferrante — Digital Strategist & AI Specialist">
+    <meta name="twitter:description" content="Aiuto le aziende a integrare l'intelligenza artificiale nei processi che contano.">
+    <meta name="twitter:image" content="https://daniferr.com/photo.jpg">
+    <link rel="canonical" href="https://daniferr.com/">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -1025,7 +1033,7 @@
             <div class="about-left">
                 <div class="portrait-box reveal">
                     <!-- Sostituisci photo.jpg con photo_beach.jpg quando carichi la foto spiaggia -->
-                    <img class="portrait-img" src="photo.jpg" alt="Danilo Ferrante — Digital Strategist & AI Specialist">
+                    <img class="portrait-img" src="photo.jpg" alt="Danilo Ferrante — Digital Strategist & AI Specialist" loading="lazy" decoding="async">
                     <div class="portrait-overlay"></div>
                     <div class="portrait-scanlines"></div>
                     <div class="portrait-caption">// Danilo Ferrante · Roma</div>
@@ -1311,15 +1319,16 @@
                         <span class="clink-ico">in</span>
                         <span>linkedin.com/in/danilo-ferrante</span>
                     </a>
-                    <a href="https://www.daniferr.com" target="_blank" class="clink">
-                        <span class="clink-ico">@</span>
-                        <span>daniferr.com</span>
+                    <a href="https://www.linkedin.com/in/danilo-ferrante-a426061b5/" target="_blank" class="clink">
+                        <span class="clink-ico">↗</span>
+                        <span>Connettiti su LinkedIn</span>
                     </a>
                 </div>
             </div>
             <div class="reveal d1">
-                <form class="form" id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
+                <form class="form" id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="form-name" value="contact">
+                    <input type="hidden" name="bot-field" style="display:none">
                     <div class="fg">
                         <label for="f-name">Nome</label>
                         <input type="text" id="f-name" name="name" placeholder="Mario Rossi" required>
@@ -1346,8 +1355,8 @@
                         <label for="f-msg">Messaggio</label>
                         <textarea id="f-msg" name="messaggio" placeholder="Descrivimi il tuo progetto o le tue sfide…" required></textarea>
                     </div>
-                    <!-- honeypot anti-spam -->
-                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    <!-- honeypot Netlify (bot-field dichiarato nel form) -->
+                    <p style="display:none"><label>Non compilare: <input name="bot-field"></label></p>
                     <div class="recaptcha-wrap">
                         <div data-netlify-recaptcha="true"></div>
                     </div>
@@ -1554,10 +1563,15 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     btn.disabled = true;
 
     try {
+        const formData = new FormData(this);
+        // Aggiungi esplicitamente il token reCAPTCHA (necessario con Netlify AJAX)
+        if (typeof grecaptcha !== 'undefined') {
+            formData.set('g-recaptcha-response', grecaptcha.getResponse());
+        }
         const res = await fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(new FormData(this)).toString()
+            body: new URLSearchParams(formData).toString()
         });
         if (res.ok) {
             btn.textContent = '✓ Inviato — ti rispondo presto';
